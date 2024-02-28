@@ -44,6 +44,8 @@ func rpcPublishMessagePayloadOptionsToSerializeInput(po *v1alpha.PublishMessageP
 		encoding = serde.PayloadEncodingSmile
 	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_UINT:
 		encoding = serde.PayloadEncodingUint
+	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_REST:
+		encoding = serde.PayloadEncodingREST
 	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_UNSPECIFIED,
 		v1alpha.PayloadEncoding_PAYLOAD_ENCODING_BINARY,
 		v1alpha.PayloadEncoding_PAYLOAD_ENCODING_CONSUMER_OFFSETS:
@@ -117,6 +119,8 @@ func toProtoEncoding(serdeEncoding serde.PayloadEncoding) v1alpha.PayloadEncodin
 		encoding = v1alpha.PayloadEncoding_PAYLOAD_ENCODING_BINARY
 	case serde.PayloadEncodingConsumerOffsets:
 		encoding = v1alpha.PayloadEncoding_PAYLOAD_ENCODING_CONSUMER_OFFSETS
+	case serde.PayloadEncodingREST:
+		encoding = v1alpha.PayloadEncoding_PAYLOAD_ENCODING_REST
 	case serde.PayloadEncodingUnspecified:
 		encoding = v1alpha.PayloadEncoding_PAYLOAD_ENCODING_UNSPECIFIED
 	case serde.PayloadEncodingCbor:
@@ -158,6 +162,8 @@ func fromProtoEncoding(protoEncoding v1alpha.PayloadEncoding) serde.PayloadEncod
 		encoding = serde.PayloadEncodingBinary
 	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_CONSUMER_OFFSETS:
 		encoding = serde.PayloadEncodingConsumerOffsets
+	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_REST:
+		encoding = serde.PayloadEncodingREST
 	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_UNSPECIFIED:
 		encoding = serde.PayloadEncodingUnspecified
 	case v1alpha.PayloadEncoding_PAYLOAD_ENCODING_CBOR:

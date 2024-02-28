@@ -238,7 +238,7 @@ function processVersionInfo(headers: Headers) {
 
       return;
     }
-  } catch {} // Catch malformed json (old versions where info is not sent as json yet)
+  } catch { } // Catch malformed json (old versions where info is not sent as json yet)
 }
 
 const cache = new LazyMap<string, CacheEntry>((u) => new CacheEntry(u));
@@ -1111,7 +1111,7 @@ const apiStore = {
 
         subjectVersions?.set(version, cleanedReferences);
       })
-      .catch(() => {});
+      .catch(() => { });
   },
 
   async refreshSchemaUsagesById(schemaId: number, force?: boolean): Promise<void> {
@@ -2239,12 +2239,12 @@ export function createMessageSearch() {
         ..._searchRequest,
         ...(appConfig.jwt
           ? {
-              enterprise: {
-                redpandaCloud: {
-                  accessToken: appConfig.jwt,
-                },
+            enterprise: {
+              redpandaCloud: {
+                accessToken: appConfig.jwt,
               },
-            }
+            },
+          }
           : {}),
       };
       this.searchRequest = searchRequest;
@@ -2400,6 +2400,9 @@ export function createMessageSearch() {
                   case PayloadEncoding.CBOR:
                     m.key.encoding = 'cbor';
                     break;
+                  case PayloadEncoding.REST:
+                    m.key.encoding = 'rest';
+                    break;
                   default:
                     console.log('unhandled key encoding type', {
                       encoding: key?.encoding,
@@ -2417,7 +2420,7 @@ export function createMessageSearch() {
 
                 try {
                   m.key.payload = JSON.parse(keyPayload);
-                } catch {}
+                } catch { }
 
                 m.key.troubleshootReport = key?.troubleshootReport;
                 m.key.schemaId = key?.schemaId ?? 0;
@@ -2476,6 +2479,9 @@ export function createMessageSearch() {
                   case PayloadEncoding.CBOR:
                     m.value.encoding = 'cbor';
                     break;
+                  case PayloadEncoding.REST:
+                    m.key.encoding = 'rest';
+                    break;
                   default:
                     console.log('unhandled value encoding type', {
                       encoding: val?.encoding,
@@ -2495,7 +2501,7 @@ export function createMessageSearch() {
 
                 try {
                   m.value.payload = JSON.parse(valuePayload);
-                } catch {}
+                } catch { }
 
                 m.valueJson = JSON.stringify(m.value.payload);
                 m.value.size = Number(val?.payloadSize);
@@ -2694,7 +2700,7 @@ async function parseOrUnwrap<T>(response: Response, text: string | null): Promis
   }
   try {
     obj = JSON.parse(text);
-  } catch {}
+  } catch { }
 
   // api error?
   if (isApiError(obj)) throw new WrappedApiError(response, obj);

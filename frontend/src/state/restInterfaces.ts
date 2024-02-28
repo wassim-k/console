@@ -161,7 +161,8 @@ export type MessageDataType =
   | 'msgpack'
   | 'uint'
   | 'smile'
-  | 'cbor';
+  | 'cbor'
+  | 'rest';
 export enum CompressionType {
   Unknown = 'unknown',
 

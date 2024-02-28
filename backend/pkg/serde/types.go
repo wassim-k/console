@@ -45,6 +45,8 @@ const (
 	PayloadEncodingUint PayloadEncoding = "uint"
 	// PayloadEncodingCbor is the enum of cbor types.
 	PayloadEncodingCbor PayloadEncoding = "cbor"
+	// PayloadEncodingREST is the enum of REST encoded types.
+	PayloadEncodingREST PayloadEncoding = "rest"
 )
 
 // HeaderEncoding is an enum for different header encoding types.
