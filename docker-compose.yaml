@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  console:
+    image: 3970ad8fdd8c
+    restart: on-failure
+    entrypoint: /bin/sh
+    command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["host.docker.internal:9092"]
+          rest:
+            enabled: true
+            topicNames: ["test"]
+            url: "https://host.docker.internal/api/device-payload"
+    ports:
+      - "8080:8080"

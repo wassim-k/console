@@ -4,7 +4,7 @@ tasks:
     desc: install golang compiler
     run: once
     vars:
-      GOLANG_URL_DEFAULT: https://golang.org/dl/go{{.GO_VERSION}}.{{OS}}-{{ARCH}}.tar.gz
+      GOLANG_URL_DEFAULT: https://go.dev/dl/go{{.GO_VERSION}}.{{OS}}-{{ARCH}}.zip
       GOLANG_URL: '{{default .GOLANG_URL_DEFAULT .GOLANG_URL}}'
     cmds:
       - rm -rf {{.GO_BUILD_ROOT}}

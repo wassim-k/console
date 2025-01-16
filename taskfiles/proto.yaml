@@ -79,7 +79,7 @@ tasks:
     desc: install buf
     vars:
       BUF_VERSION: 1.37.0
-      BUF_URL: https://github.com/bufbuild/buf/releases/download/v{{.BUF_VERSION}}/buf-$(uname -s)-$(uname -m)
+      BUF_URL: https://github.com/bufbuild/buf/releases/download/v{{.BUF_VERSION}}/buf-Windows-x86_64.exe
     cmds:
       - mkdir -p {{.BUILD_ROOT}}/bin
       - curl -sSLf --retry 3 --retry-connrefused --retry-delay 2 {{.BUF_URL}} -o '{{.BUILD_ROOT}}/bin/buf'

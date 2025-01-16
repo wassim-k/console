@@ -1,0 +1,8 @@
+kafka:
+  brokers: ["localhost:9092"]
+  rest:
+    enabled: true
+    topics:
+      - name: "owlshop-orders-protobuf"
+        url: "http://localhost:5131/api/device-observation/deserialize"
+  

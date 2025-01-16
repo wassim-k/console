@@ -18,7 +18,7 @@ services:
       - 29092:29092
 
   console:
-    image: docker.redpanda.com/redpandadata/console:v2.3.8
+    image: redpanda-console:1.4.0
     restart: on-failure
     entrypoint: /bin/sh
     command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
@@ -30,6 +30,11 @@ services:
           schemaRegistry:
             enabled: true
             urls: ["http://redpanda:8081"]
+          rest:
+            enabled: true
+            topics:
+              - name: "owlshop-orders-protobuf"
+                url: "http://host.docker.internal:5131/api/device-observation/deserialize"
         connect:
           enabled: true
           clusters:
